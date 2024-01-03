@@ -29,7 +29,30 @@ function getPrompts(){
   characterLength = parseInt(prompt('How many characters should password be? Password should be between 12 - 128 characters long.'));
   
   //Check for password length parameters
-     
+  if(isNaN(characterLength) | characterLength < 12 | characterLength > 128) {
+    alert('Character length invalid');
+    return false; 
+  }   
+}
+
+//Prompt for lower case values in password
+if (confirm('Would you like lowercase characters in your password?')){
+  choiceArr = choiceArr.concat(lowerCaseArr);
+}
+
+//Prompt for upper case values in password
+if (confirm('Would you like uppercase characters in your password?')){
+  choiceArr = choiceArr.concat(upperCaseArr);
+}
+
+//prompt for specual characters in password
+if (confirm('Would you like special characters in your password?')){
+  choiceArr = choiceArr.concat(specialCharArr);
+}
+
+//prompt for numeric values in password
+if (confirm('Would you like numeric characters in your password?')){
+  choiceArr = choiceArr.concat(numberArr);
 }
 }
 
