@@ -16,26 +16,40 @@ generateBtn.addEventListener("click", writePassword);
 
 // Write password to the #password input
 function writePassword() {
+  //returns true or false
+  var correctPrompts = getPrompts();
+
+  if(correctPrompts) {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
+  }
 }
 
+//Generate a password based on prompt criteria
 function generatePassword() {
-//Generate a password according to prompt
-function getPrompts(){
-  characterLength = parseInt(prompt('How many characters should password be? Password should be between 12 - 128 characters long.'));
-  
-  //Check for password length parameters
-  if(isNaN(characterLength) | characterLength < 12 | characterLength > 128) {
-    alert('Character length invalid');
-    return false; 
-  }   
+  var password = '';
+  for(var i = 0; i < characterLength; i++) {
+    var randomIndex = Math.floor(Math.random() * choiceArr.length);
+    password = password + choiceArr[randomIndex];
+  }
+  return password;
 }
 
-//Prompt for lower case values in password
+//Generate a password according to prompt
+function getPrompts() {
+  //resets the choiceArr
+  choiceArr = [];
+
+  //prompt and value for password length
+  characterLength = parseInt(prompt('How many characters would you like your password to be? Password must be 12-128 characters.'));
+
+  if(isNaN(characterLength) || characterLength < 12 || characterLength > 128) {
+    alert('Character length is invalid');
+    return false;
+  }
+  //Prompt for lower case values in password
 if (confirm('Would you like lowercase characters in your password?')){
   choiceArr = choiceArr.concat(lowerCaseArr);
 }
@@ -54,6 +68,8 @@ if (confirm('Would you like special characters in your password?')){
 if (confirm('Would you like numeric characters in your password?')){
   choiceArr = choiceArr.concat(numberArr);
 }
+return true;
 }
+
 
 
